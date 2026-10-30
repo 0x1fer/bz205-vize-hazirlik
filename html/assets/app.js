@@ -176,18 +176,34 @@
   });
   refreshProgress();
 
-  /* ---------- kendini sına: çözümleri gizle */
+  /* ---------- çözümleri aç / kapat: çözüm blokları varsayılan kapalı, üstteki düğme hepsini birden açar ya da kapatır */
   var quizBtn = document.getElementById('quizBtn');
+  var solBlocks = document.querySelectorAll('details.box-cozum');
+  if (!solBlocks.length) solBlocks = document.querySelectorAll('details.box-cevap');
+  var anyOpen = function () { return Array.prototype.some.call(solBlocks, function (d) { return d.open; }); };
+  var syncQuiz = function () {
+    if (!quizBtn) return;
+    var open = anyOpen();
+    quizBtn.setAttribute('aria-pressed', !open);
+    quizBtn.querySelector('.lbl').textContent = open ? 'Çözümleri gizle' : 'Çözümleri göster';
+  };
   if (quizBtn) {
-    var setQuiz = function (on) {
-      document.querySelectorAll('details.box-cevap').forEach(function (d) { d.open = !on; });
-      quizBtn.setAttribute('aria-pressed', on);
-      quizBtn.querySelector('.lbl').textContent = on ? 'Çözümleri göster' : 'Çözümleri gizle';
-      store.set('quiz', on);
-    };
-    quizBtn.addEventListener('click', function () { setQuiz(quizBtn.getAttribute('aria-pressed') !== 'true'); });
-    if (store.get('quiz', false)) setQuiz(true);
+    quizBtn.addEventListener('click', function () {
+      var open = !anyOpen();
+      solBlocks.forEach(function (d) { d.open = open; });
+      syncQuiz();
+    });
+    document.addEventListener('toggle', function (e) { if (e.target.matches && e.target.matches('details.box-cozum, details.box-cevap')) syncQuiz(); }, true);
+    syncQuiz();
   }
+  /* bağlantı kapalı bir çözümün içini gösteriyorsa o çözümü aç */
+  var openTarget = function () {
+    var t = location.hash && document.getElementById(decodeURIComponent(location.hash.slice(1)));
+    var d = t && t.closest && t.closest('details.box-cozum');
+    if (d && !d.open) { d.open = true; t.scrollIntoView(); }
+  };
+  window.addEventListener('hashchange', openTarget);
+  openTarget();
 
   /* ---------- diyagram büyütme */
   if (lb) {

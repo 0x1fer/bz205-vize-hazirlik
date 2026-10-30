@@ -257,6 +257,11 @@ details:not([open]) .tog::after { transform: rotate(45deg); }
 details.box:not([open]) { border-style: dashed; box-shadow: none; }
 details.box:not([open]) > summary { border-bottom: 0; }
 details[open] > .box-b { animation: reveal .28s ease-out; }
+.box-cozum { --c: var(--green); }
+.box-cozum > .box-b { padding-top: 0; }
+.box-cozum[open] > summary .tog::before { content: "Çözümü gizle"; }
+.box-cozum:not([open]) > summary .tog::before { content: "Çözümü göster"; }
+.box-cozum:not([open]) { background: color-mix(in srgb, var(--green) 4%, var(--surface)); }
 @keyframes reveal { from { opacity: 0; transform: translateY(-4px); } }
 
 /* ------------------------------------------------ yan yana bloklar (minipage) */
