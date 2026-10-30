@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Listeler ve Bağlantılı Listeler | BZ205 Vize</title>
+<script>var t='dark';try{t=localStorage.getItem('bz205:theme')||'dark';}catch(e){}document.documentElement.dataset.theme=t;</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,400;0,14..32,500;0,14..32,600;0,14..32,700;1,14..32,400&family=Plus+Jakarta+Sans:wght@600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/katex/katex.min.css">
+<link rel="stylesheet" href="assets/style.css">
+<link rel="stylesheet" href="assets/viz.css">
+</head>
+<body class="doc g-konu" data-page="konu-04-liste" data-group="konu" data-unit="h3" data-title="Bağlantılı listeler" style="--accent:#2DD4BF">
+<div class="readbar"><span></span></div>
+<header class="topbar">
+  <button class="tb-btn menu" id="menuBtn" type="button" aria-label="İçindekiler"><span class="ic ic-menu"></span></button>
+  <a class="brand" href="../index.html"><span class="brand-dot"></span>BZ205 Vize</a>
+  <span class="crumb">Bağlantılı listeler</span>
+  <div class="tb-actions">
+    <button class="tb-btn sbtn" id="searchBtn" type="button"><span class="ic ic-search"></span><span class="lbl">Ara</span><kbd>Ctrl K</kbd></button>
+    
+    <button class="tb-btn" id="themeBtn" type="button" aria-label="Tema değiştir"><span class="ic ic-theme"></span></button>
+  </div>
+</header>
+<div class="layout">
+  <aside class="toc" id="toc">
+    <div class="toc-head">
+      <span>İçindekiler</span>
+      <span class="toc-prog"><b id="pgDone">0</b>/<b id="pgAll">5</b> başlık çalışıldı</span>
+      <span class="meter"><i id="pgBar"></i></span>
+    </div>
+    <nav><ol class="toc-l"><li class="t2"><a href="#listeler-ve-baglantili-listeler"><span class="tn">4</span><span>Listeler ve Bağlantılı Listeler</span></a><ol class="toc-s"><li class="t3"><a href="#veri-yapisi-ve-soyut-veri-tipi"><span class="tn">4.1</span><span>Veri yapısı ve soyut veri tipi</span></a></li><li class="t3"><a href="#dizi-ile-baglantili-liste-karsilastirmasi"><span class="tn">4.2</span><span>Dizi ile bağlantılı liste karşılaştırması</span></a></li><li class="t3"><a href="#liste-islemleri-slayt-ornegi-34-12-52-16-12"><span class="tn">4.3</span><span>Liste işlemleri (slayt örneği: 34, 12, 52, 16, 12)</span></a></li><li class="t3"><a href="#baglantili-liste-gerceklestirmesi-c"><span class="tn">4.4</span><span>Bağlantılı liste gerçekleştirmesi (C++)</span></a></li><li class="t4"><a href="#insertnode-belirtilen-konumdan-sonra-ekleme"><span class="tn"></span><span>InsertNode – belirtilen konumdan sonra ekleme</span></a></li><li class="t4"><a href="#findnode-ve-deletenode"><span class="tn"></span><span>FindNode ve DeleteNode</span></a></li><li class="t3"><a href="#liste-cesitleri"><span class="tn">4.5</span><span>Liste çeşitleri</span></a></li></ol></li></ol></nav>
+  </aside>
+  <main class="content" id="content">
+    <header class="doc-hero">
+      <p class="kicker">Konu 4</p>
+      <h1><span class="fs-l">Listeler ve Bağlantılı Listeler</span></h1>
+      <p class="byline">Hocanın ders videoları, slaytları ve sınav soruları temel alınmıştır</p>
+      <ul class="chips"><li>1 bölüm</li><li>4 diyagram</li><li>3 kod bloğu</li><li>1 etkileşimli animasyon</li></ul>
+    </header>
+    <article class="prose">
+<h2 id="listeler-ve-baglantili-listeler" class="h"><span class="num">4</span><span class="ht">Listeler ve Bağlantılı Listeler</span></h2>
+<h3 id="veri-yapisi-ve-soyut-veri-tipi" class="h"><span class="num">4.1</span><span class="ht">Veri yapısı ve soyut veri tipi</span></h3>
+<p>Bir veri yapısı tanımlarken iki şey belirlenir: (1) <strong>nesneler kümesi</strong> (ne depolanacak: tam sayı, ondalık, karakter, öğrenci kaydı…), (2) <strong>işlemler kümesi</strong> (bu veriler üzerinde hangi işlemler yapılacak). <strong>Soyut veri tipi (SVT) = soyut veri yapısı</strong>: dildeki temel tipleri kullanarak oluşturduğumuz yeni tip (kum + çimento <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.3669em;"></span><span class="mrel">→</span></span></span></span> beton benzetmesi). C++'ta <code class="tt">class</code> ile tanımlanır.</p>
+<ul class="l"><li><strong>class – struct farkı:</strong> class içinde değişkenler <em>ve</em> fonksiyonlar tanımlanabilir (fonksiyonu sadece sınıf içindekiler kullanır); struct'ta fonksiyonlar dışarıda tanımlanır ve başka yerlerden erişilebilir (risk).</li><li><strong>SVT avantajları:</strong> modülerlik (kütüphane bir kez yazılır), bilgi gizleme, hızlı prototipleme. <strong>Dezavantajı:</strong> verimlilik kaybı (kullanılmayan yetenekler de yüklenir).</li></ul>
+<h3 id="dizi-ile-baglantili-liste-karsilastirmasi" class="h"><span class="num">4.2</span><span class="ht">Dizi ile bağlantılı liste karşılaştırması</span></h3>
+<div class="center"><div class="tbl-wrap"><table class="tbl"><thead><tr><th></th><th>Dizi</th><th>Bağlantılı liste</th></tr></thead><tbody><tr><td>Boyut</td><td>Sabit, derleme anında verilir</td><td>Değişken (bellek elverdiği sürece)</td></tr><tr><td>Bellek</td><td>Ardışık <em>blok</em> hafıza gerekir (6'lık dizi 5'lik boşluklara sığmaz)</td><td>Düğümler bellekte dağınık olabilir, bağlantılarla birleşir</td></tr><tr><td>Veri tipi</td><td>Tek tip, hücrede tek veri (öğrenci için 3 ayrı dizi: no, ad, soyad)</td><td>Düğümde birden çok/farklı tipte veri (no, ad, soyad birlikte)</td></tr><tr><td>Başa ekleme/silme</td><td>Tüm elemanlar kayar: <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathnormal">n</span><span class="mclose">)</span></span></span></span></td><td>Sabit: <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord">1</span><span class="mclose">)</span></span></span></span></td></tr><tr><td><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord mathnormal" style="margin-right:0.03148em;">k</span></span></span></span>. eleman (findKth)</td><td>Sabit: <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord">1</span><span class="mclose">)</span></span></span></span></td><td>Baştan gezilir: <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathnormal">n</span><span class="mclose">)</span></span></span></span></td></tr><tr><td>Bulma, yazdırma</td><td><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathnormal">n</span><span class="mclose">)</span></span></span></span></td><td><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathnormal">n</span><span class="mclose">)</span></span></span></span></td></tr></tbody></table></div></div>
+<h3 id="liste-islemleri-slayt-ornegi-34-12-52-16-12" class="h"><span class="num">4.3</span><span class="ht">Liste işlemleri (slayt örneği: 34, 12, 52, 16, 12)</span></h3>
+<ul class="l"><li><code class="tt">printList</code>: listeyi yaz. &emsp;<code class="tt">makeEmpty</code>: listeyi boşalt (dönem bitti, yeni ders).</li><li><code class="tt">find(52)</code> <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.3669em;"></span><span class="mrel">→</span></span></span></span> 3 (konumu döner; bulunamazsa 0/NULL). Sıralı olmadığı için baştan tek tek bakılır.</li><li><code class="tt">insert(3, x)</code> <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.3669em;"></span><span class="mrel">→</span></span></span></span> 34, 12, 52, <strong>x</strong>, 16, 12 (3. veriden sonra ekle; tren vagonu araya eklemek gibi).</li><li><code class="tt">remove(52)</code> <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.3669em;"></span><span class="mrel">→</span></span></span></span> 34, 12, 16, 12 (vagonu çıkarıp önceki ve sonrakini bağlamak).</li><li><code class="tt">findKth(5)</code> <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.3669em;"></span><span class="mrel">→</span></span></span></span> 12 (5. eleman). <em>Ders varsayımı: her veriden bir tane vardır.</em></li></ul>
+<h3 id="baglantili-liste-gerceklestirmesi-c" class="h"><span class="num">4.4</span><span class="ht">Bağlantılı liste gerçekleştirmesi (C++)</span></h3>
+<div class="code"><pre><code><span class="k-k">class</span> Node {
+<span class="k-k">public</span>:
+    <span class="k-k">double</span> data;      <span class="k-c">// veri (ogrenci icin no, ad, soyad olabilir)</span>
+    Node*  next;      <span class="k-c">// sonraki dugume isaretci</span>
+};
+<span class="k-k">class</span> List {
+<span class="k-k">public</span>:
+    List(<span class="k-k">void</span>) { head = <span class="k-k">NULL</span>; }             <span class="k-c">// yapici: bos liste</span>
+    ~List(<span class="k-k">void</span>);                            <span class="k-c">// yikici</span>
+    <span class="k-k">bool</span>  IsEmpty() { <span class="k-k">return</span> head == <span class="k-k">NULL</span>; }
+    Node* InsertNode(<span class="k-k">int</span> index, <span class="k-k">double</span> x);
+    <span class="k-k">int</span>   FindNode(<span class="k-k">double</span> x);
+    <span class="k-k">int</span>   DeleteNode(<span class="k-k">double</span> x);
+    <span class="k-k">void</span>  DisplayList(<span class="k-k">void</span>);
+<span class="k-k">private</span>:
+    Node* head;       <span class="k-c">// ilk dugumu gosterir; verisi yok (lokomotif)</span>
+};</code></pre></div>
+<p><code class="tt">head</code> <em>private</em>'tır: listenin başlangıcını dışarıdan kimse değiştirememeli. Son düğümün <code class="tt">next</code>'i NULL'dır.</p>
+<h4 id="insertnode-belirtilen-konumdan-sonra-ekleme" class="h"><span class="num"></span><span class="ht">InsertNode – belirtilen konumdan sonra ekleme</span></h4>
+<div class="code"><pre><code>Node* List::InsertNode(<span class="k-k">int</span> index, <span class="k-k">double</span> x) {
+    <span class="k-k">if</span> (index &lt; <span class="k-n">0</span>) <span class="k-k">return</span> <span class="k-k">NULL</span>;
+    <span class="k-k">int</span> currIndex = <span class="k-n">1</span>;
+    Node* currNode = head;
+    <span class="k-k">while</span> (currNode &amp;&amp; index &gt; currIndex) {    <span class="k-c">// index'inci dugumu bul</span>
+        currNode = currNode-&gt;next;
+        currIndex++;
+    }
+    <span class="k-k">if</span> (index &gt; <span class="k-n">0</span> &amp;&amp; currNode == <span class="k-k">NULL</span>) <span class="k-k">return</span> <span class="k-k">NULL</span>;   <span class="k-c">// oyle bir dugum yok</span>
+    Node* newNode = <span class="k-k">new</span> Node;
+    newNode-&gt;data = x;
+    <span class="k-k">if</span> (index == <span class="k-n">0</span>) {                          <span class="k-c">// basa ekle</span>
+        newNode-&gt;next = head;
+        head = newNode;
+    } <span class="k-k">else</span> {                                   <span class="k-c">// currNode'dan sonra ekle</span>
+        newNode-&gt;next = currNode-&gt;next;
+        currNode-&gt;next = newNode;
+    }
+    <span class="k-k">return</span> newNode;
+}</code></pre></div>
+<section class="box box-dikkat"><div class="box-h"><i class="shape s-karar"></i><span class="bt">Bağlantı sırası</span></div><div class="box-b"><p>Araya eklemede önce <code class="tt">newNode-&gt;next = currNode-&gt;next</code>, <em>sonra</em> <code class="tt">currNode-&gt;next = newNode</code> yapılır. Ters sırada yapılırsa listenin geri kalanı kaybolur.</p></div></section>
+<div class="center"><figure class="gfx gfx-flow"><button type="button" class="zoom" aria-label="Büyüt"><img src="assets/gfx/g_81b9d70f6971.svg" width="526" height="590" loading="lazy" alt="Akış diyagramı"></button></figure></div>
+<p>Yürütme zamanı: en kötü (sona ekleme) <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.13889em;">T</span><span class="mopen">(</span><span class="mord mathnormal">n</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.7278em;vertical-align:-0.0833em;"></span><span class="mord">3</span><span class="mord mathnormal">n</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">8</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">⇒</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathnormal">n</span><span class="mclose">)</span></span></span></span>; en iyi (başa ekleme) sabit <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.3669em;"></span><span class="mrel">⇒</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">Ω</span><span class="mopen">(</span><span class="mord">1</span><span class="mclose">)</span></span></span></span> (ayrıntı: çözüm dosyası).</p>
+<h4 id="findnode-ve-deletenode" class="h"><span class="num"></span><span class="ht">FindNode ve DeleteNode</span></h4>
+<div class="code"><pre><code><span class="k-k">int</span> List::FindNode(<span class="k-k">double</span> x) {
+    Node* currNode = head;
+    <span class="k-k">int</span> currIndex = <span class="k-n">1</span>;
+    <span class="k-k">while</span> (currNode &amp;&amp; currNode-&gt;data != x) {
+        currNode = currNode-&gt;next;
+        currIndex++;
+    }
+    <span class="k-k">if</span> (currNode) <span class="k-k">return</span> currIndex;
+    <span class="k-k">return</span> <span class="k-n">0</span>;                                  <span class="k-c">// bulunamadi</span>
+}
+<span class="k-k">int</span> List::DeleteNode(<span class="k-k">double</span> x) {
+    Node* prevNode = <span class="k-k">NULL</span>;
+    Node* currNode = head;
+    <span class="k-k">int</span> currIndex = <span class="k-n">1</span>;
+    <span class="k-k">while</span> (currNode &amp;&amp; currNode-&gt;data != x) {
+        prevNode = currNode;
+        currNode = currNode-&gt;next;
+        currIndex++;
+    }
+    <span class="k-k">if</span> (currNode) {
+        <span class="k-k">if</span> (prevNode) prevNode-&gt;next = currNode-&gt;next;   <span class="k-c">// aradan cikar</span>
+        <span class="k-k">else</span>          head = currNode-&gt;next;             <span class="k-c">// bastaki silindi</span>
+        <span class="k-k">delete</span> currNode;
+        <span class="k-k">return</span> currIndex;
+    }
+    <span class="k-k">return</span> <span class="k-n">0</span>;
+}
+<span class="k-k">void</span> List::DisplayList() {
+    <span class="k-k">int</span> num = <span class="k-n">0</span>;
+    Node* currNode = head;
+    <span class="k-k">while</span> (currNode != <span class="k-k">NULL</span>) {
+        cout &lt;&lt; currNode-&gt;data &lt;&lt; endl;
+        currNode = currNode-&gt;next;
+        num++;
+    }
+    cout &lt;&lt; <span class="k-s">"Dugum sayisi: "</span> &lt;&lt; num &lt;&lt; endl;
+}</code></pre></div>
+<div class="akis-bas"><i class="shape s-basla"></i>Akış diyagramı: FindNode (listede arama)</div>
+<div class="center"><figure class="gfx gfx-flow"><button type="button" class="zoom" aria-label="Büyüt"><img src="assets/gfx/g_cecc53ef74af.svg" width="337" height="446" loading="lazy" alt="Akış diyagramı"></button></figure></div>
+<p>Farz edin ki sorularında listede öğrenci aramanın kalıbıdır.</p>
+<div class="akis-bas"><i class="shape s-basla"></i>Akış diyagramı: DeleteNode (listeden silme)</div>
+<div class="center"><figure class="gfx gfx-flow"><button type="button" class="zoom" aria-label="Büyüt"><img src="assets/gfx/g_19c2725cd189.svg" width="361" height="706" loading="lazy" alt="Akış diyagramı"></button></figure></div>
+<p>Silinecek düğümün <em>öncekisi</em> gerektiği için <code class="tt">prevNode</code> tutulur; baştaki siliniyorsa <code class="tt">head</code> güncellenir.</p>
+<div class="akis-bas"><i class="shape s-basla"></i>Akış diyagramı: listeyi baştan sona gezme (DisplayList kalıbı)</div>
+<div class="center"><figure class="gfx gfx-flow"><button type="button" class="zoom" aria-label="Büyüt"><img src="assets/gfx/g_b2edb33d0550.svg" width="253" height="284" loading="lazy" alt="Akış diyagramı"></button></figure></div>
+<div class="viz" data-viz="liste" data-init="34,12,52,16,12"><noscript>Bu animasyon için JavaScript gerekir.</noscript></div>
+<p><strong>Zaman ve alan karmaşıklığı</strong></p>
+<div class="center"><div class="tbl-wrap"><table class="tbl"><thead><tr><th>İşlem</th><th class="ac">En iyi</th><th class="ac">En kötü</th><th class="ac">Ek alan</th><th>Not</th></tr></thead><tbody><tr><td><code class="tt">InsertNode</code> (konum <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord mathnormal" style="margin-right:0.03148em;">k</span></span></span></span>)</td><td class="ac"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">Ω</span><span class="mopen">(</span><span class="mord">1</span><span class="mclose">)</span></span></span></span></td><td class="ac"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathnormal">n</span><span class="mclose">)</span></span></span></span></td><td class="ac"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord">1</span><span class="mclose">)</span></span></span></span></td><td>en iyi başa ekleme; en kötü sona ekleme, <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.13889em;">T</span><span class="mopen">(</span><span class="mord mathnormal">n</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.7278em;vertical-align:-0.0833em;"></span><span class="mord">3</span><span class="mord mathnormal">n</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">8</span></span></span></span></td></tr><tr><td><code class="tt">FindNode</code></td><td class="ac"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">Ω</span><span class="mopen">(</span><span class="mord">1</span><span class="mclose">)</span></span></span></span></td><td class="ac"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathnormal">n</span><span class="mclose">)</span></span></span></span></td><td class="ac"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord">1</span><span class="mclose">)</span></span></span></span></td><td>en iyi aranan ilk düğümde; en kötü sonda veya yok</td></tr><tr><td><code class="tt">DeleteNode</code></td><td class="ac"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">Ω</span><span class="mopen">(</span><span class="mord">1</span><span class="mclose">)</span></span></span></span></td><td class="ac"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathnormal">n</span><span class="mclose">)</span></span></span></span></td><td class="ac"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord">1</span><span class="mclose">)</span></span></span></span></td><td>silinecek düğüm önce aranır; bağlantıyı değiştirmek sabit</td></tr><tr><td><code class="tt">DisplayList</code></td><td class="ac"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">Θ</span><span class="mopen">(</span><span class="mord mathnormal">n</span><span class="mclose">)</span></span></span></span></td><td class="ac"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">Θ</span><span class="mopen">(</span><span class="mord mathnormal">n</span><span class="mclose">)</span></span></span></span></td><td class="ac"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord">1</span><span class="mclose">)</span></span></span></span></td><td>her düğüm bir kez yazılır</td></tr><tr><td><code class="tt">findKth</code>(<span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord mathnormal" style="margin-right:0.03148em;">k</span></span></span></span>)</td><td class="ac"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">Ω</span><span class="mopen">(</span><span class="mord">1</span><span class="mclose">)</span></span></span></span></td><td class="ac"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathnormal">n</span><span class="mclose">)</span></span></span></span></td><td class="ac"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord">1</span><span class="mclose">)</span></span></span></span></td><td>dizide <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord">1</span><span class="mclose">)</span></span></span></span>; listede baştan <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord mathnormal" style="margin-right:0.03148em;">k</span></span></span></span> düğüm gezilir</td></tr></tbody></table></div></div>
+<h3 id="liste-cesitleri" class="h"><span class="num">4.5</span><span class="ht">Liste çeşitleri</span></h3>
+<ul class="l"><li><strong>Dairesel bağlantılı liste:</strong> son düğüm NULL yerine ilk düğümü gösterir.</li><li><strong>Çift yönlü bağlantılı liste:</strong> her düğümde <code class="tt">next</code> ve <code class="tt">prev</code> vardır; geriye doğru gezilebilir, silmede önceki düğümü aramaya gerek kalmaz.</li></ul>
+<section class="box box-bilgi"><div class="box-h"><i class="shape s-islem"></i><span class="bt">Sınav bağlantısı</span></div><div class="box-b"><p>Farz edin ki sorularında liste gezme kalıbı: <code class="tt">d = liste.head; while (d != NULL) { …d = d-&gt;next; }</code>. Hocanın kabul ettiği temel işlemler: <code class="tt">head</code>, <code class="tt">next</code>, <code class="tt">FindNode/find</code>, <code class="tt">InsertNode</code>, <code class="tt">DeleteNode</code>. Yılı bilinmeyen bir vizede <q class="alinti">bağlantılı liste ekleme akış diyagramı, karmaşıklığı</q> soruldu ve fonksiyonu öğrencinin yazması istendi.</p></div></section>
+    </article>
+    <nav class="pager"><a class="pg prev" href="konu-03-siralama.html"><small>Önceki</small><span>Sıralama algoritmaları</span></a><a class="pg next" href="konu-05-yigin-kuyruk.html"><small>Sonraki</small><span>Yığın ve kuyruk</span></a></nav>
+  </main>
+</div>
+<div class="lightbox" id="lightbox" hidden>
+  <div class="lb-bar"><button type="button" data-z="-1" aria-label="Uzaklaştır">−</button><button type="button" data-z="0">Sığdır</button><button type="button" data-z="1" aria-label="Yakınlaştır">+</button><button type="button" data-z="x" aria-label="Kapat">✕</button></div>
+  <div class="lb-stage"><div class="lb-frame"><img alt=""></div></div>
+</div>
+<div class="search" id="search" hidden>
+  <div class="search-panel" role="dialog" aria-label="Arama">
+    <input type="search" id="searchIn" placeholder="Konu, algoritma ya da kelime ara (ör. pivot, AVL silme)" autocomplete="off">
+    <ol id="searchOut"></ol>
+    <p class="search-hint">Yukarı/aşağı ok ile seç, Enter ile git, Esc ile kapat.</p>
+  </div>
+</div>
+<script src="assets/search-index.js"></script>
+<script src="assets/app.js"></script>
+<script src="assets/viz.js"></script>
+</body>
+</html>

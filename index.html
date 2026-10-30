@@ -1,0 +1,264 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BZ205 Vize Hazırlık</title>
+<script>var t='dark';try{t=localStorage.getItem('bz205:theme')||'dark';}catch(e){}document.documentElement.dataset.theme=t;</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,400;0,14..32,500;0,14..32,600;0,14..32,700;1,14..32,400&family=Plus+Jakarta+Sans:wght@600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="html/assets/style.css">
+<style>
+  .home-top { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+  .hero { position: relative; isolation: isolate; padding: 76px 0 44px; display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(300px, .7fr); gap: 40px 56px; align-items: end; }
+  .hero::before {
+    content: ""; position: absolute; z-index: -1; inset: -60px -30vw -40px; pointer-events: none;
+    background:
+      radial-gradient(520px 300px at 8% 20%, color-mix(in srgb, #818CF8 calc(var(--glow) * 110%), transparent), transparent 70%),
+      radial-gradient(460px 260px at 48% 0%, color-mix(in srgb, #F472B6 calc(var(--glow) * 80%), transparent), transparent 70%),
+      radial-gradient(420px 260px at 85% 60%, color-mix(in srgb, #22D3EE calc(var(--glow) * 70%), transparent), transparent 70%);
+    filter: blur(10px);
+  }
+  .pill { display: inline-flex; align-items: center; gap: 8px; padding: 6px 13px 6px 11px; border-radius: 999px; font-size: 13px; font-weight: 600; color: var(--text-2); background: var(--surface); border: 1px solid var(--border); margin-bottom: 22px; }
+  .pill i { width: 7px; height: 7px; border-radius: 50%; background: var(--green); box-shadow: 0 0 10px var(--green); }
+  .hero h1 { margin: 0; font: 800 clamp(2.8rem, 7vw, 5.4rem)/1 var(--f-head); letter-spacing: -.04em; }
+  .hero h1 .grad { background: linear-gradient(95deg, #818CF8 0%, #C084FC 35%, #F472B6 65%, #FB923C 100%); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .hero .lead { margin: 22px 0 0; max-width: 36rem; font-size: 18px; line-height: 1.6; color: var(--text-2); }
+  .hero-side { display: grid; gap: 12px; }
+  .fake-search {
+    display: flex; align-items: center; gap: 12px; width: 100%; padding: 15px 16px; cursor: text; text-align: left;
+    border: 1px solid var(--border-2); border-radius: 14px; background: var(--surface); color: var(--text-3); font-size: 15.5px;
+    box-shadow: var(--shadow); transition: border-color .15s, box-shadow .15s;
+  }
+  .fake-search:hover { border-color: #818CF8; box-shadow: 0 0 0 4px rgba(129,140,248,.15), var(--shadow); }
+  .fake-search kbd { margin-left: auto; font: 500 11px/1 var(--f-mono); padding: 5px 7px; border-radius: 6px; background: var(--surface-3); }
+  .resume { display: grid; grid-template-columns: 1fr auto; gap: 2px 14px; align-items: center; padding: 14px 16px; border-radius: 14px; border: 1px solid var(--border); background: var(--surface); text-decoration: none; color: var(--text); transition: border-color .15s; }
+  .resume small { color: var(--text-3); font-size: 12.5px; font-weight: 500; grid-column: 1; }
+  .resume b { font: 700 16px/1.3 var(--f-head); grid-column: 1; }
+  .resume em { font-style: normal; color: var(--text-2); font-size: 13.5px; grid-column: 1; }
+  .resume .go { grid-column: 2; grid-row: 1 / span 3; width: 38px; height: 38px; border-radius: 11px; display: grid; place-items: center; background: color-mix(in srgb, var(--accent) 20%, transparent); color: var(--accent); font-size: 18px; }
+  .resume:hover { border-color: var(--accent); }
+  .overall { display: grid; grid-template-columns: auto 1fr; gap: 14px; align-items: center; padding: 14px 16px; border-radius: 14px; border: 1px solid var(--border); background: var(--surface); }
+  .ring { --p: 0; width: 52px; height: 52px; border-radius: 50%; display: grid; place-items: center; background: conic-gradient(var(--green) calc(var(--p) * 1%), var(--surface-3) 0); }
+  .ring span { width: 42px; height: 42px; border-radius: 50%; background: var(--surface); display: grid; place-items: center; font: 600 12.5px var(--f-mono); }
+  .overall b { display: block; font: 700 15px/1.3 var(--f-head); }
+  .overall small { color: var(--text-3); font-size: 13px; }
+
+  .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin: 6px 0 56px; }
+  .stat { padding: 16px 18px; border-radius: 14px; background: var(--surface); border: 1px solid var(--border); }
+  .stat b { display: block; font: 800 1.9rem/1.1 var(--f-head); letter-spacing: -.02em; color: var(--sc); }
+  .stat span { font-size: 13.5px; color: var(--text-2); }
+
+  .sec-h { display: flex; align-items: baseline; gap: 14px; margin: 0 0 16px; }
+  .sec-h h2 { margin: 0; font: 800 1.6rem/1.2 var(--f-head); letter-spacing: -.02em; }
+  .sec-h p { margin: 0; color: var(--text-3); font-size: 14.5px; }
+  .grid { display: grid; gap: 14px; margin-bottom: 56px; }
+  .grid.sinav { grid-template-columns: repeat(3, 1fr); }
+  .grid.konu { grid-template-columns: repeat(3, 1fr); }
+  @media (max-width: 960px) { .grid.konu { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 600px) { .grid.konu { grid-template-columns: 1fr; } }
+  .card {
+    --hue: #818CF8; position: relative; overflow: hidden; isolation: isolate;
+    display: flex; flex-direction: column; gap: 10px; padding: 20px; border-radius: 18px; min-height: 210px;
+    background: var(--surface); border: 1px solid var(--border); color: var(--text); text-decoration: none;
+    transition: transform .2s ease, border-color .2s, box-shadow .2s;
+  }
+  .card::before {
+    content: ""; position: absolute; z-index: -1; inset: -40% -20% auto auto; width: 260px; height: 220px;
+    background: radial-gradient(closest-side, color-mix(in srgb, var(--hue) 34%, transparent), transparent); opacity: .7; transition: opacity .2s;
+  }
+  .card:hover { transform: translateY(-3px); border-color: color-mix(in srgb, var(--hue) 55%, var(--border)); box-shadow: 0 20px 40px -24px color-mix(in srgb, var(--hue) 70%, transparent); }
+  .card:hover::before { opacity: 1; }
+  .card-top { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+  .badge {
+    width: 44px; height: 44px; border-radius: 13px; display: grid; place-items: center; font: 800 18px/1 var(--f-head);
+    color: #0D0F14; background: var(--hue); box-shadow: 0 8px 22px -8px var(--hue);
+  }
+  .card .pdf { position: relative; z-index: 2; font-size: 12px; font-weight: 600; padding: 5px 10px; border-radius: 8px; border: 1px solid var(--border); color: var(--text-2); text-decoration: none; background: var(--surface-2); }
+  .card .pdf:hover { color: var(--text); border-color: var(--border-2); }
+  .card h3 { margin: 6px 0 0; font: 700 1.2rem/1.25 var(--f-head); letter-spacing: -.015em; }
+  .card h3 a { color: inherit; text-decoration: none; }
+  .card h3 a::after { content: ""; position: absolute; inset: 0; z-index: 1; }
+  .card p { margin: 0; color: var(--text-2); font-size: 14.5px; line-height: 1.55; flex: 1; }
+  .meta { display: flex; flex-wrap: wrap; gap: 6px; }
+  .meta span { font-size: 12px; font-weight: 500; padding: 3px 9px; border-radius: 999px; background: var(--surface-2); color: var(--text-2); border: 1px solid var(--border); }
+  .prog { display: flex; align-items: center; gap: 10px; font: 500 12px var(--f-mono); color: var(--text-3); }
+  .prog i { flex: 1; height: 5px; border-radius: 5px; background: var(--surface-3); overflow: hidden; }
+  .prog i b { display: block; height: 100%; width: calc(var(--p) * 1%); background: var(--hue); border-radius: inherit; }
+  .grid.sinav .card { min-height: 240px; }
+  .card.wide { grid-column: 1 / -1; min-height: 0; flex-direction: row; align-items: center; gap: 18px; }
+  .card.wide p { flex: 1; }
+  .card.wide .prog { width: 220px; }
+
+  .lower { display: grid; grid-template-columns: 1.3fr 1fr; gap: 16px; margin: 0 0 60px; }
+  .panel { padding: 24px 26px; border: 1px solid var(--border); border-radius: 18px; background: var(--surface); }
+  .panel h2 { margin: 0 0 4px; font: 800 1.35rem/1.2 var(--f-head); letter-spacing: -.015em; }
+  .panel > p { margin: 0 0 16px; color: var(--text-3); font-size: 14px; }
+  .rules { margin: 0; padding: 0; list-style: none; counter-reset: r; display: grid; gap: 10px; font-size: 14.8px; line-height: 1.55; color: var(--text-2); }
+  .rules li { counter-increment: r; display: grid; grid-template-columns: 28px 1fr; gap: 12px; }
+  .rules li::before { content: counter(r); width: 26px; height: 26px; border-radius: 8px; display: grid; place-items: center; font: 600 12px var(--f-mono); color: var(--green); background: color-mix(in srgb, var(--green) 14%, transparent); }
+  .rules b { color: var(--text); font-weight: 600; }
+  .legend-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
+  .legend-list li { display: grid; grid-template-columns: 32px 1fr; gap: 14px; align-items: center; }
+  .legend-list b { display: block; font: 700 14.5px/1.3 var(--f-head); }
+  .legend-list span { color: var(--text-3); font-size: 13.5px; }
+  .foot { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px; padding: 22px 0 44px; border-top: 1px solid var(--border); color: var(--text-3); font-size: 13px; }
+  .foot button { background: none; border: 0; padding: 0; color: var(--text-3); text-decoration: underline; cursor: pointer; font-size: 13px; }
+  .foot button:hover { color: var(--red); }
+
+  @media (max-width: 960px) {
+    .hero { grid-template-columns: 1fr; padding-top: 48px; }
+    .stats { grid-template-columns: repeat(2, 1fr); }
+    .grid.sinav { grid-template-columns: 1fr; }
+    .lower { grid-template-columns: 1fr; }
+    .card.wide { flex-direction: column; align-items: stretch; }
+    .card.wide .prog { width: auto; }
+  }
+  @media (max-width: 560px) {
+    .home-top { padding: 0 16px; }
+    .grid.sinav .card, .card { min-height: 0; }
+  }
+</style>
+</head>
+<body class="home" data-base="html/" style="--accent:#818CF8">
+<header class="topbar">
+  <a class="brand" href="index.html"><span class="brand-dot"></span>BZ205 Vize</a>
+  <div class="tb-actions">
+    <button class="tb-btn sbtn" id="searchBtn" type="button"><span class="ic ic-search"></span><span class="lbl">Ara</span><kbd>Ctrl K</kbd></button>
+    <button class="tb-btn" id="themeBtn" type="button" aria-label="Tema değiştir"><span class="ic ic-theme"></span></button>
+  </div>
+</header>
+
+<div class="home-top">
+  <section class="hero">
+    <div>
+      <span class="pill"><i></i>Veri Yapıları ve Algoritmalar dersi</span>
+      <h1>BZ205 <span class="grad">Vize Hazırlık</span></h1>
+      <p class="lead">Çıkmış sorular, hocanın kurallarıyla adım adım çözümler ve vizedeki bütün konuların anlatımı tek yerde.</p>
+    </div>
+    <div class="hero-side">
+      <button class="fake-search" type="button" id="heroSearch"><span class="ic ic-search"></span>Bütün sayfalarda ara<kbd>Ctrl K</kbd></button>
+      <a class="resume" id="resume" hidden href="#"><small>Kaldığın yerden devam et</small><b></b><em></em><span class="go">›</span></a>
+      <div class="overall"><span class="ring" id="ovRing"><span id="ovPct">%0</span></span><div><b id="ovTxt">Henüz başlamadın</b><small>Sayfalardaki "Çalıştım" işaretleri burada toplanır.</small></div></div>
+    </div>
+  </section>
+
+  <section class="stats" id="stats"></section>
+
+  <div class="sec-h"><h2>Sınav arşivi</h2><p>sorular, çözümler ve analiz</p></div>
+  <section class="grid sinav" id="gSinav"></section>
+
+  <div class="sec-h"><h2>Konu anlatımı</h2><p>dersteki sırayla</p></div>
+  <section class="grid konu" id="gKonu"></section>
+
+  <section class="lower">
+    <div class="panel">
+      <h2>Sınavda unutma</h2>
+      <p>Hocanın derste koyduğu ve bütün çözümlerde uygulanan kurallar.</p>
+      <ol class="rules">
+        <li><span><b>Alfabe:</b> Türkçe ve İngilizce birleşik: A B C Ç D E F G Ğ H I İ J K L M N O Ö P Q R S Ş T U Ü V W X Y Z. Kısa kelime önce gelir (VAN, VANA'dan önce). Kelimeler sayıya çevrilmez.</span></li>
+        <li><span><b>İAA ve AVL'de silme:</b> iki çocuklu düğümün yerine sağ alt ağacın en küçüğü geçer.</span></li>
+        <li><span><b>AVL silmede</b> iki problem birden varsa hoca çift dönüşü tercih eder.</span></li>
+        <li><span><b>Kümeleme sıralama:</b> zigzag ekleme, düğüm çocuklarından büyük; koparmada son eleman köke gelir ve büyük çocukla yer değiştirir.</span></li>
+        <li><span><b>Radiks:</b> kısa kelimelerin sonuna A eklenir, en sağdaki haneden başlanır, kovalar geliş sırasını korur.</span></li>
+        <li><span><b>B+:</b> iç düğüm en az ⌈M/2⌉−1, en çok M−1 anahtar; yaprak en az ⌈L/2⌉−1, en çok L−1 veri.</span></li>
+        <li><span><b>Yürütme zamanı:</b> aksi söylenmedikçe en kötü durum yazılır; değişken tanımları "ihmal edilmiştir" diye not düşülür.</span></li>
+      </ol>
+    </div>
+    <div class="panel">
+      <h2>Kutuların anlamı</h2>
+      <p>Kutular derste anlatılan akış diyagramı sembolleriyle işaretli.</p>
+      <ul class="legend-list">
+        <li style="--c: var(--amber)"><i class="shape s-giris"></i><div><b>Soru</b><span>Paralelkenar, yani giriş: sınavda verilen.</span></div></li>
+        <li style="--c: var(--green)"><i class="shape s-basla"></i><div><b>Çözüm</b><span>Elips. "Çözümleri gizle" ile kapatıp kendini sınayabilirsin.</span></div></li>
+        <li style="--c: var(--orange)"><i class="shape s-ekran"></i><div><b>Hoca derste vurguladı</b><span>Ekran sembolü. Ders videosundan alıntı ve dakikası.</span></div></li>
+        <li style="--c: var(--red)"><i class="shape s-karar"></i><div><b>Dikkat</b><span>Karar baklavası. Sık yapılan hatalar.</span></div></li>
+        <li style="--c: var(--blue)"><i class="shape s-islem"></i><div><b>Bilgi</b><span>İşlem kutusu. Ek açıklamalar.</span></div></li>
+      </ul>
+    </div>
+  </section>
+
+  <footer class="foot">
+    <span>LaTeX kaynaklarından üretildi. Kaynağı değiştirince: <code class="tt">python3 tex/html_gen/build_html.py</code></span>
+    <button type="button" id="resetBtn">İlerlemeyi sıfırla</button>
+  </footer>
+</div>
+
+<div class="search" id="search" hidden>
+  <div class="search-panel" role="dialog" aria-label="Arama">
+    <input type="search" id="searchIn" placeholder="Konu, algoritma ya da kelime ara (ör. pivot, AVL silme)" autocomplete="off">
+    <ol id="searchOut"></ol>
+    <p class="search-hint">Yukarı/aşağı ok ile seç, Enter ile git, Esc ile kapat.</p>
+  </div>
+</div>
+
+<script src="html/assets/search-index.js"></script>
+<script src="html/assets/app.js"></script>
+<script>
+(function () {
+  var PAGES = [{"out": "vize-sorulari", "label": "Vize soruları", "hue": "#38BDF8", "desc": "2020'den bu yana çıkmış vize soruları, hocanın örnek soruları ve farz edin ki havuzu.", "group": "sinav", "no": "", "h2": 10, "gfx": 2, "soru": 26, "cevap": 0, "code": 2, "units": ["sinavlardaki-ortak-format-kelime-dizisi-olusturma", "2020-2021-guz-donemi-vize-sinavi-pdf-resmi", "2021-yaz-okulu-vize-sinavi-pdf-resmi-cozumlu-ogrenci-pdf-i", "2024-2025-guz-donemi-vize-sinavi-fotograf-ogrenci-aktarimiyl", "2024-2025-mazeret-telafi-sinavi-fotograf-tahmini", "2025-2026-guz-donemi-vize-sinavi-16-kasim-2025-ogrenci-aktar", "yili-bilinmeyen-vize-sorulari-ogrenci-aktarimi-sinavlar-md", "hocanin-paylastigi-ornek-sinav-sorulari-pdf-resmi", "farz-edin-ki-soru-havuzu-vize-final-but-derste-cozulenler", "ek-final-ve-butunleme-sinavlarinda-sorulanlar-karsilastirma-"]}, {"out": "vize-cozumleri", "label": "Çözümler", "hue": "#34D399", "desc": "Her sorunun hocanın kurallarıyla adım adım çözümü: ağaçlar, tablolar, akış diyagramları.", "group": "sinav", "no": "", "h2": 7, "gfx": 133, "soru": 0, "cevap": 27, "code": 10, "units": ["soru-1a-kumeleme-siralama-heapsort", "soru-1b-hizli-siralama-pivot-en-sondaki-kelime", "soru-2-avl-agaci", "soru-3-b-agaci", "soru-4-farz-edin-ki-baglantili-liste-b", "soru-1a-kabarcik-siralama", "soru-1b-radiks-siralama", "soru-2-ikili-arama-agaci", "soru-3-ifade-agaci-ve-yigin", "soru-4-farz-edin-ki-kuyruk-yigin-iaa", "soru-1-genislik-oncelikli-arama-ve-sonrakok-sal-dan-alfabeti", "soru-2a-hizli-siralamanin-akis-diyagrami", "soru-2b-yurutme-zamani-ve-zaman-karmasikligi", "soru-2c-hizli-siralama-pivot-en-bastaki-kelime", "soru-3-b-agaci-ic-dugum-anahtar-sayisi-3-yaprak-maks-3-elema", "soru-4-farz-edin-ki-avl-yigin-baglantili-liste-sadece-bir-de", "soru-1-fonk2-ve-fonk3", "soru-2-torq-dan-bfs-ve-sonrakok", "soru-1-hizli-siralama", "soru-2-ikili-arama-agacinda-silme", "soru-3-farz-edin-ki-liste-kuyruk-avl-birden-fazla-ders-alanl", "soru-4-avl-agaci", "soru-1-hizli-siralama-ornek-kelimeler-pivot-en-sondaki", "soru-2-avl-olusturma-iki-kok-silme-oncekok", "soru-3-baglantili-listeye-ekleme-insertnode", "soru-4-farz-edin-ki-yigin-kuyruk-avl-uc-dersi-de-alanlar", "ornek-1-sekil-1-avl-8-ekle-2-ekle-9-sil", "ornek-2-sekil-2-avl-4-sil-kok-sil", "ornek-3-graf-dfs-ve-bfs-a-dan-alfabetik-onde-oncelikli", "ornek-4-avl-sayilar", "ornek-5-postfix", "ornek-6-farz-edin-ki-liste-kuyruk-her-iki-dersi-alanlar"]}, {"out": "soru-analizi", "label": "Soru analizi", "hue": "#A78BFA", "desc": "Hangi konu ne sıklıkla soruluyor, hoca derste neyi vurguladı, 2026 için tahmin.", "group": "sinav", "no": "", "h2": 7, "gfx": 0, "soru": 0, "cevap": 0, "code": 0, "units": ["incelenen-kaynaklar", "sinav-konu-matrisi-vize-ve-vize-formatindaki-sinavlar", "konularin-vizelerde-sorulma-orani", "farz-edin-ki-sorulari-ayrintili-analiz", "hocanin-ders-videolarinda-vurguladigi-noktalar-zaman-damgali", "sinav-kosullari-ve-taktikler", "2026-guz-vizesi-icin-tahmin"]}, {"out": "konu-01-akis", "label": "Akış diyagramları", "hue": "#60A5FA", "desc": "Semboller, kontrol yapıları, kurallar ve sınavda istenen diyagramların hangi konuda olduğu.", "group": "konu", "no": "1", "h2": 1, "gfx": 2, "soru": 0, "cevap": 0, "code": 0, "units": ["algoritmanin-uc-gosterimi", "standart-semboller-derste-kullanilan", "kontrol-yapilari", "derste-cozulen-ornekler", "akis-diyagrami-cizerken-kurallar", "sinavda-istenen-akis-diyagramlari-ve-nerede-olduklari"]}, {"out": "konu-02-karmasiklik", "label": "Karmaşıklık analizi", "hue": "#C084FC", "desc": "Yürütme zamanı, O / Ω / Θ, sayma kuralları ve sınavda yazım şablonu.", "group": "konu", "no": "2", "h2": 1, "gfx": 3, "soru": 0, "cevap": 0, "code": 6, "units": ["tanim-ve-amac", "dort-terim", "asimptotik-notasyonlar", "bilinen-buyume-fonksiyonlari", "sayma-kurallari", "derste-cozulen-ornekler", "sinavda-yurutme-zamani-nasil-yazilir-sablon"]}, {"out": "konu-03-siralama", "label": "Sıralama algoritmaları", "hue": "#F472B6", "desc": "Yedi algoritma: kod, akış diyagramı, T(n) tablosu ve adım adım animasyon.", "group": "konu", "no": "3", "h2": 1, "gfx": 29, "soru": 0, "cevap": 0, "code": 7, "units": ["araya-sokma-siralama-insertion-sort", "secmeli-siralama-selection-sort", "kabarcik-siralama-bubble-sort", "birlesmeli-siralama-merge-sort", "kumeleme-siralama-heap-sort", "hizli-siralama-quick-sort", "radiks-siralama-radix-sort", "ozet-tablo"]}, {"out": "konu-04-liste", "label": "Bağlantılı listeler", "hue": "#2DD4BF", "desc": "Dizi ile liste karşılaştırması, C++ gerçekleştirmesi, ekleme ve silme.", "group": "konu", "no": "4", "h2": 1, "gfx": 4, "soru": 0, "cevap": 0, "code": 3, "units": ["veri-yapisi-ve-soyut-veri-tipi", "dizi-ile-baglantili-liste-karsilastirmasi", "liste-islemleri-slayt-ornegi-34-12-52-16-12", "baglantili-liste-gerceklestirmesi-c", "liste-cesitleri"]}, {"out": "konu-05-yigin-kuyruk", "label": "Yığın ve kuyruk", "hue": "#FBBF24", "desc": "LIFO ve FIFO, postfix hesaplama, yapıyı bozmadan gezme.", "group": "konu", "no": "5", "h2": 1, "gfx": 7, "soru": 0, "cevap": 0, "code": 6, "units": ["yigin-lifo-son-giren-ilk-cikar", "postfix-sonek-ifadenin-yiginla-hesaplanmasi", "kuyruk-fifo-ilk-giren-ilk-cikar", "farz-edin-ki-sorularinda-yigin-ve-kuyrugu-bozmadan-gezmek", "zaman-ve-alan-karmasikligi"]}, {"out": "konu-06-agac", "label": "İkili ağaçlar ve İAA", "hue": "#22D3EE", "desc": "İfade ağaçları, gezme sıraları, ikili arama ağacında ekleme ve silme.", "group": "konu", "no": "6", "h2": 1, "gfx": 18, "soru": 0, "cevap": 0, "code": 3, "units": ["neden-agac", "ifade-agaclari", "agac-gezme-traversal", "ikili-arama-agaci-iaa", "iaa-kodlari", "zaman-ve-alan-karmasikligi"]}, {"out": "konu-07-avl", "label": "AVL ağaçları", "hue": "#FB923C", "desc": "Denge kuralı, dört problem ve dönüşler, ekleme ve silme.", "group": "konu", "no": "7", "h2": 1, "gfx": 20, "soru": 0, "cevap": 0, "code": 1, "units": ["neden-avl", "denge-kurali", "dort-problem-ve-cozumleri", "ekleme", "silme"]}, {"out": "konu-08-farz", "label": "Farz edin ki", "hue": "#F87171", "desc": "Temel işlemler tablosu, küme işlemleri ve hocanın çözüm şablonu.", "group": "konu", "no": "8", "h2": 1, "gfx": 1, "soru": 0, "cevap": 0, "code": 1, "units": ["temel-islemler-tablosu", "kume-islemleri", "sablon-hocanin-tahtadaki-cozumune-gore", "cevap-kagidinda-olmasi-gerekenler"]}, {"out": "konu-09-bplus-graf", "label": "B+ ağacı ve graf", "hue": "#818CF8", "desc": "B+ ekleme kuralları ile BFS, DFS ve sonrakök gezme.", "group": "konu", "no": "9", "h2": 1, "gfx": 15, "soru": 0, "cevap": 0, "code": 2, "units": ["ek-b-agaclari-ve-graf-arama-bazi-yillarda-vizeye-girdi"]}, {"out": "konu-tumu", "label": "Tüm konular tek sayfada", "hue": "#E879F9", "desc": "Dokuz konunun hepsi art arda; baştan sona tekrar için.", "group": "konu", "no": "∑", "h2": 9, "gfx": 99, "soru": 0, "cevap": 0, "code": 29, "units": ["algoritmanin-uc-gosterimi", "standart-semboller-derste-kullanilan", "kontrol-yapilari", "derste-cozulen-ornekler", "akis-diyagrami-cizerken-kurallar", "sinavda-istenen-akis-diyagramlari-ve-nerede-olduklari", "tanim-ve-amac", "dort-terim", "asimptotik-notasyonlar", "bilinen-buyume-fonksiyonlari", "sayma-kurallari", "derste-cozulen-ornekler-2", "sinavda-yurutme-zamani-nasil-yazilir-sablon", "araya-sokma-siralama-insertion-sort", "secmeli-siralama-selection-sort", "kabarcik-siralama-bubble-sort", "birlesmeli-siralama-merge-sort", "kumeleme-siralama-heap-sort", "hizli-siralama-quick-sort", "radiks-siralama-radix-sort", "ozet-tablo", "veri-yapisi-ve-soyut-veri-tipi", "dizi-ile-baglantili-liste-karsilastirmasi", "liste-islemleri-slayt-ornegi-34-12-52-16-12", "baglantili-liste-gerceklestirmesi-c", "liste-cesitleri", "yigin-lifo-son-giren-ilk-cikar", "postfix-sonek-ifadenin-yiginla-hesaplanmasi", "kuyruk-fifo-ilk-giren-ilk-cikar", "farz-edin-ki-sorularinda-yigin-ve-kuyrugu-bozmadan-gezmek", "zaman-ve-alan-karmasikligi", "neden-agac", "ifade-agaclari", "agac-gezme-traversal", "ikili-arama-agaci-iaa", "iaa-kodlari", "zaman-ve-alan-karmasikligi-2", "neden-avl", "denge-kurali", "dort-problem-ve-cozumleri", "ekleme", "silme", "temel-islemler-tablosu", "kume-islemleri", "sablon-hocanin-tahtadaki-cozumune-gore", "cevap-kagidinda-olmasi-gerekenler", "b-agaci", "graflar-bfs-dfs-ve-sonrakok"]}];
+  var S = window.BZStore;
+  var PDF = {
+    'vize-sorulari': '01_Vize_Sorulari', 'vize-cozumleri': '02_Vize_Cozumleri', 'soru-analizi': '03_Soru_Analizi', 'konu-tumu': '04_Konu_Anlatimi_Tum',
+    'konu-01-akis': 'Konu_01_akis', 'konu-02-karmasiklik': 'Konu_02_karmasiklik', 'konu-03-siralama': 'Konu_03_siralama', 'konu-04-liste': 'Konu_04_liste',
+    'konu-05-yigin-kuyruk': 'Konu_05_yigin_kuyruk', 'konu-06-agac': 'Konu_06_agac', 'konu-07-avl': 'Konu_07_avl', 'konu-08-farz': 'Konu_08_farz', 'konu-09-bplus-graf': 'Konu_09_ek_bplus_graf'
+  };
+  var MARK = { 'vize-sorulari': 'S', 'vize-cozumleri': 'Ç', 'soru-analizi': '%' };
+  function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
+  function doneCount(p) {
+    var n = 0;
+    p.units.forEach(function (id) { if (S.get('done:' + (p.group === 'konu' ? 'konu' : p.out) + ':' + id, false)) n++; });
+    return n;
+  }
+  var total = 0, totalDone = 0, sums = { soru: 0, gfx: 0, cevap: 0, code: 0 };
+  function card(p) {
+    var d = doneCount(p), pct = p.units.length ? Math.round(d / p.units.length * 100) : 0;
+    if (p.out !== 'konu-tumu') { total += p.units.length; totalDone += d; ['soru', 'gfx', 'cevap', 'code'].forEach(function (k) { sums[k] += p[k] || 0; }); }
+    var meta = [];
+    if (p.h2 > 1) meta.push(p.h2 + ' bölüm');
+    if (p.soru) meta.push(p.soru + ' soru');
+    if (p.gfx) meta.push(p.gfx + ' diyagram');
+    if (p.code) meta.push(p.code + ' kod');
+    var mark = p.group === 'sinav' ? MARK[p.out] : p.no;
+    var wide = p.out === 'konu-tumu' ? ' wide' : '';
+    return '<article class="card' + wide + '" style="--hue:' + p.hue + ';--p:' + pct + '">' +
+      '<div class="card-top"><span class="badge">' + esc(mark) + '</span><a class="pdf" href="pdf/' + PDF[p.out] + '.pdf" title="Aynı içeriğin PDF hâli">PDF</a></div>' +
+      '<h3><a href="html/' + p.out + '.html">' + esc(p.label) + '</a></h3><p>' + esc(p.desc) + '</p>' +
+      '<div class="meta">' + meta.map(function (m) { return '<span>' + m + '</span>'; }).join('') + '</div>' +
+      '<div class="prog"><i><b></b></i>' + d + '/' + p.units.length + '</div></article>';
+  }
+  document.getElementById('gSinav').innerHTML = PAGES.filter(function (p) { return p.group === 'sinav'; }).map(card).join('');
+  document.getElementById('gKonu').innerHTML = PAGES.filter(function (p) { return p.group === 'konu'; }).map(card).join('');
+
+  var st = [
+    [sums.soru, 'çıkmış ve örnek soru', '#FBBF24'], [sums.cevap, 'çözüm kutusu', '#34D399'],
+    [sums.gfx, 'ağaç ve akış diyagramı', '#60A5FA'], [sums.code, 'kod bloğu', '#F472B6']
+  ];
+  document.getElementById('stats').innerHTML = st.map(function (s) {
+    return '<div class="stat" style="--sc:' + s[2] + '"><b>' + s[0] + '</b><span>' + s[1] + '</span></div>';
+  }).join('');
+
+  var pctAll = total ? Math.round(totalDone / total * 100) : 0;
+  document.getElementById('ovRing').style.setProperty('--p', pctAll);
+  document.getElementById('ovPct').textContent = '%' + pctAll;
+  if (totalDone) document.getElementById('ovTxt').textContent = totalDone + ' / ' + total + ' başlık çalışıldı';
+
+  var last = S.get('last', null);
+  if (last && last.p) {
+    var r = document.getElementById('resume');
+    var lp = PAGES.filter(function (p) { return p.out === last.p; })[0];
+    if (lp) r.style.setProperty('--accent', lp.hue);
+    r.href = 'html/' + last.p + '.html' + (last.id ? '#' + last.id : '');
+    r.querySelector('b').textContent = last.l;
+    r.querySelector('em').textContent = (last.t ? last.t + ', ' : '') + 'sayfanın %' + (last.pct || 0) + '\'i okundu';
+    r.hidden = false;
+  }
+  document.getElementById('heroSearch').addEventListener('click', function () { window.BZOpenSearch(); });
+  document.getElementById('resetBtn').addEventListener('click', function () {
+    if (!confirm('Bütün "çalıştım" işaretleri ve kaldığın yer silinsin mi?')) return;
+    try { Object.keys(localStorage).forEach(function (k) { if (/^bz205:(done|last|quiz)/.test(k)) localStorage.removeItem(k); }); } catch (e) {}
+    location.reload();
+  });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Yığın ve Kuyruk | BZ205 Vize</title>
+<script>var t='dark';try{t=localStorage.getItem('bz205:theme')||'dark';}catch(e){}document.documentElement.dataset.theme=t;</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,400;0,14..32,500;0,14..32,600;0,14..32,700;1,14..32,400&family=Plus+Jakarta+Sans:wght@600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/katex/katex.min.css">
+<link rel="stylesheet" href="assets/style.css">
+<link rel="stylesheet" href="assets/viz.css">
+</head>
+<body class="doc g-konu" data-page="konu-05-yigin-kuyruk" data-group="konu" data-unit="h3" data-title="Yığın ve kuyruk" style="--accent:#FBBF24">
+<div class="readbar"><span></span></div>
+<header class="topbar">
+  <button class="tb-btn menu" id="menuBtn" type="button" aria-label="İçindekiler"><span class="ic ic-menu"></span></button>
+  <a class="brand" href="../index.html"><span class="brand-dot"></span>BZ205 Vize</a>
+  <span class="crumb">Yığın ve kuyruk</span>
+  <div class="tb-actions">
+    <button class="tb-btn sbtn" id="searchBtn" type="button"><span class="ic ic-search"></span><span class="lbl">Ara</span><kbd>Ctrl K</kbd></button>
+    
+    <button class="tb-btn" id="themeBtn" type="button" aria-label="Tema değiştir"><span class="ic ic-theme"></span></button>
+  </div>
+</header>
+<div class="layout">
+  <aside class="toc" id="toc">
+    <div class="toc-head">
+      <span>İçindekiler</span>
+      <span class="toc-prog"><b id="pgDone">0</b>/<b id="pgAll">5</b> başlık çalışıldı</span>
+      <span class="meter"><i id="pgBar"></i></span>
+    </div>
+    <nav><ol class="toc-l"><li class="t2"><a href="#yigin-stack-ve-kuyruk-queue"><span class="tn">5</span><span>Yığın (Stack) ve Kuyruk (Queue)</span></a><ol class="toc-s"><li class="t3"><a href="#yigin-lifo-son-giren-ilk-cikar"><span class="tn">5.1</span><span>Yığın – LIFO (son giren ilk çıkar)</span></a></li><li class="t4"><a href="#dizi-ile-gerceklestirme"><span class="tn"></span><span>Dizi ile gerçekleştirme</span></a></li><li class="t4"><a href="#baglantili-liste-ile-gerceklestirme"><span class="tn"></span><span>Bağlantılı liste ile gerçekleştirme</span></a></li><li class="t3"><a href="#postfix-sonek-ifadenin-yiginla-hesaplanmasi"><span class="tn">5.2</span><span>Postfix (sonek) ifadenin yığınla hesaplanması</span></a></li><li class="t3"><a href="#kuyruk-fifo-ilk-giren-ilk-cikar"><span class="tn">5.3</span><span>Kuyruk – FIFO (ilk giren ilk çıkar)</span></a></li><li class="t4"><a href="#dizi-ile-dairesel-kuyruk"><span class="tn"></span><span>Dizi ile dairesel kuyruk</span></a></li><li class="t3"><a href="#farz-edin-ki-sorularinda-yigin-ve-kuyrugu-bozmadan-gezmek"><span class="tn">5.4</span><span>Farz edin ki sorularında yığın ve kuyruğu bozmadan gezmek</span></a></li><li class="t3"><a href="#zaman-ve-alan-karmasikligi"><span class="tn">5.5</span><span>Zaman ve alan karmaşıklığı</span></a></li></ol></li></ol></nav>
+  </aside>
+  <main class="content" id="content">
+    <header class="doc-hero">
+      <p class="kicker">Konu 5</p>
+      <h1><span class="fs-l">Yığın ve Kuyruk</span></h1>
+      <p class="byline">Hocanın ders videoları, slaytları ve sınav soruları temel alınmıştır</p>
+      <ul class="chips"><li>1 bölüm</li><li>7 diyagram</li><li>6 kod bloğu</li><li>3 etkileşimli animasyon</li></ul>
+    </header>
+    <article class="prose">
+<h2 id="yigin-stack-ve-kuyruk-queue" class="h"><span class="num">5</span><span class="ht">Yığın (Stack) ve Kuyruk (Queue)</span></h2>
+<h3 id="yigin-lifo-son-giren-ilk-cikar" class="h"><span class="num">5.1</span><span class="ht">Yığın – LIFO (son giren ilk çıkar)</span></h3>
+<p>Ekleme ve silme yalnızca <strong>tepeden (top)</strong> yapılır. Temel işlemler: <code class="tt">push(x)</code> (tepeye ekle), <code class="tt">pop()</code> (tepedekini çıkar ve döndür), <code class="tt">top()</code> (tepedekini silmeden gör), <code class="tt">isEmpty()</code>, <code class="tt">isFull()</code>.</p>
+<section class="box box-dikkat"><div class="box-h"><i class="shape s-karar"></i><span class="bt">WhatsApp'ta tespit edilen hata</span></div><div class="box-b"><p><q class="alinti">Drive'daki farz edin ki sorularında stack.push ile if kontrolü yapılmış... Hatalı, veri alırken pop kullanıyoruz.</q> Yığından eleman <em>almak</em> için <code class="tt">pop</code> kullanılır; yığının elemanlarına indisle (<code class="tt">stack[i]</code>) erişilmez.</p></div></section>
+<h4 id="dizi-ile-gerceklestirme" class="h"><span class="num"></span><span class="ht">Dizi ile gerçekleştirme</span></h4>
+<div class="code"><pre><code><span class="k-k">class</span> Stack {
+<span class="k-k">public</span>:
+    Stack(<span class="k-k">int</span> size = <span class="k-n">10</span>) { maxTop = size - <span class="k-n">1</span>; values = <span class="k-k">new</span> <span class="k-k">double</span>[size]; top = -<span class="k-n">1</span>; }
+    <span class="k-k">bool</span> IsEmpty() { <span class="k-k">return</span> top == -<span class="k-n">1</span>; }        <span class="k-c">// bos yigin: top = -1</span>
+    <span class="k-k">bool</span> IsFull()  { <span class="k-k">return</span> top == maxTop; }
+    <span class="k-k">double</span> Push(<span class="k-k">const</span> <span class="k-k">double</span> x) {
+        <span class="k-k">if</span> (IsFull()) { cout &lt;&lt; <span class="k-s">"Yigin dolu"</span>; <span class="k-k">return</span> -<span class="k-n">1</span>; }
+        values[++top] = x;                      <span class="k-c">// once top artar, sonra yazilir</span>
+        <span class="k-k">return</span> x;
+    }
+    <span class="k-k">double</span> Pop() {
+        <span class="k-k">if</span> (IsEmpty()) { cout &lt;&lt; <span class="k-s">"Yigin bos"</span>; <span class="k-k">return</span> -<span class="k-n">1</span>; }
+        <span class="k-k">return</span> values[top--];                   <span class="k-c">// once okunur, sonra top azalir</span>
+    }
+    <span class="k-k">double</span> Top() { <span class="k-k">if</span> (IsEmpty()) <span class="k-k">return</span> -<span class="k-n">1</span>; <span class="k-k">return</span> values[top]; }
+<span class="k-k">private</span>:
+    <span class="k-k">int</span> maxTop;  <span class="k-k">int</span> top;  <span class="k-k">double</span>* values;
+};</code></pre></div>
+<p>Varsayılan boyut (10) kullanıcının boyut vermeyi unutmasına karşı konur. C'de dizinin 0. hücresinde veri olduğu için boş yığın <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7278em;vertical-align:-0.0833em;"></span><span class="mord">−</span><span class="mord">1</span></span></span></span> ile gösterilir.</p>
+<div class="akis-bas"><i class="shape s-basla"></i>Akış diyagramı: Push ve Pop (dizi ile)</div>
+<div class="center"><div class="mprow"><div class="mp center" style="--w:0.480"><figure class="gfx gfx-flow"><button type="button" class="zoom" aria-label="Büyüt"><img src="assets/gfx/g_9c4e234aceb2.svg" width="278" height="245" loading="lazy" alt="Akış diyagramı"></button></figure></div><div class="mp center" style="--w:0.480"><figure class="gfx gfx-flow"><button type="button" class="zoom" aria-label="Büyüt"><img src="assets/gfx/g_4b8e0455c4e9.svg" width="260" height="234" loading="lazy" alt="Akış diyagramı"></button></figure></div></div></div>
+<p>Boş yığında <code class="tt">top = -1</code>, dolu yığında <code class="tt">top == maxTop</code>.</p>
+<div class="viz" data-viz="yigin" data-init="5"><noscript>Bu animasyon için JavaScript gerekir.</noscript></div>
+<h4 id="baglantili-liste-ile-gerceklestirme" class="h"><span class="num"></span><span class="ht">Bağlantılı liste ile gerçekleştirme</span></h4>
+<p><code class="tt">push</code> = listenin <em>başına</em> ekleme (<code class="tt">InsertNode(0,x)</code>), <code class="tt">pop</code> = baştaki düğümü silme. Boyut sınırı yoktur. Hoca: <q class="alinti">baştan ekleme silmenin zaman karmaşıklığı sabit, order of C</q> <span class="zd" title="Ders videosu ve dakikası">video 10 Liste 2 47:34</span>.</p>
+<div class="code"><pre><code><span class="k-k">class</span> Stack : <span class="k-k">public</span> List {
+<span class="k-k">public</span>:
+    <span class="k-k">double</span> Top()  { <span class="k-k">if</span> (head == <span class="k-k">NULL</span>) <span class="k-k">return</span> -<span class="k-n">1</span>; <span class="k-k">return</span> head-&gt;data; }
+    <span class="k-k">void</span>   Push(<span class="k-k">const</span> <span class="k-k">double</span> x) { InsertNode(<span class="k-n">0</span>, x); }
+    <span class="k-k">double</span> Pop() {
+        <span class="k-k">if</span> (head == <span class="k-k">NULL</span>) { cout &lt;&lt; <span class="k-s">"Yigin bos"</span>; <span class="k-k">return</span> -<span class="k-n">1</span>; }
+        <span class="k-k">double</span> val = head-&gt;data;
+        DeleteNode(val);                        <span class="k-c">// bastaki dugum silinir</span>
+        <span class="k-k">return</span> val;
+    }
+};</code></pre></div>
+<p><strong>Karmaşıklık:</strong> push, pop, top: <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord">1</span><span class="mclose">)</span></span></span></span>.</p>
+<h3 id="postfix-sonek-ifadenin-yiginla-hesaplanmasi" class="h"><span class="num">5.2</span><span class="ht">Postfix (sonek) ifadenin yığınla hesaplanması</span></h3>
+<p>Soldan sağa okunur: <strong>sayı</strong> gelince <code class="tt">push</code>; <strong>işlem</strong> gelince iki kez <code class="tt">pop</code> – <em>ilk çıkan sağ işlenen</em>, ikinci çıkan sol işlenen – sonuç <code class="tt">push</code>. Sonda yığında kalan değer sonuçtur.</p>
+<div class="center"><div class="tbl-wrap"><table class="tbl"><thead><tr><th class="ac">Okunan</th><th>İşlem</th><th>Yığın (alt<span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.3669em;"></span><span class="mrel">→</span></span></span></span>tepe)</th></tr></thead><tbody><tr><td class="ac">5, 6, 8</td><td>push</td><td>5, 6, 8</td></tr><tr><td class="ac">*</td><td><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7278em;vertical-align:-0.0833em;"></span><span class="mord">6</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">8</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">48</span></span></span></span></td><td>5, 48</td></tr><tr><td class="ac">+</td><td><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7278em;vertical-align:-0.0833em;"></span><span class="mord">5</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">48</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">53</span></span></span></span></td><td>53</td></tr><tr><td class="ac">7, 6, 2</td><td>push</td><td>53, 7, 6, 2</td></tr><tr><td class="ac">/</td><td><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">6/2</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">3</span></span></span></span></td><td>53, 7, 3</td></tr><tr><td class="ac">–</td><td><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7278em;vertical-align:-0.0833em;"></span><span class="mord">7</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">3</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">4</span></span></span></span></td><td>53, 4</td></tr><tr><td class="ac">3</td><td>push</td><td>53, 4, 3</td></tr><tr><td class="ac">*</td><td><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7278em;vertical-align:-0.0833em;"></span><span class="mord">4</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">3</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">12</span></span></span></span></td><td>53, 12</td></tr><tr><td class="ac">–</td><td><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7278em;vertical-align:-0.0833em;"></span><span class="mord">53</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">12</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">41</span></span></span></span></td><td><strong>41</strong></td></tr></tbody></table></div></div>
+<p>(Hocanın örnek sınav sorusu: <code class="tt">5 6 8 * + 7 6 2 / - 3 * -</code> <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.3669em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">41</span></span></span></span>.) Bölme ve çıkarmada işlenen sırası önemlidir: <q class="alinti">7/5 mi yapacaksın yoksa 5/7 mi?</q></p>
+<div class="code"><pre><code>PostfixHesapla(ifade)
+  S = bos yigin
+  <span class="k-k">for</span> (her simge t, soldan saga)
+     <span class="k-k">if</span> (t sayi) S.push(t)
+     <span class="k-k">else</span>
+        b = S.pop()     <span class="k-c">// sag</span>
+        a = S.pop()     <span class="k-c">// sol</span>
+        S.push(a t b)
+  Yaz(S.pop())</code></pre></div>
+<p>2021 vizesi ve örnek sınav sorularında soruldu. Çıkarma ve bölmede ilk çıkan <em>sağ</em> işlenendir. Her simge bir kez işlenir: <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">Θ</span><span class="mopen">(</span><span class="mord mathnormal">n</span><span class="mclose">)</span></span></span></span>.</p>
+<div class="akis-bas"><i class="shape s-basla"></i>Akış diyagramı: sonek (postfix) ifadenin yığınla hesaplanması</div>
+<div class="center"><figure class="gfx gfx-flow"><button type="button" class="zoom" aria-label="Büyüt"><img src="assets/gfx/g_cb327ae77c95.svg" width="477" height="311" loading="lazy" alt="Akış diyagramı"></button></figure></div>
+<div class="viz" data-viz="postfix" data-init="5 6 8 * + 7 6 2 / - 3 * -"><noscript>Bu animasyon için JavaScript gerekir.</noscript></div>
+<h3 id="kuyruk-fifo-ilk-giren-ilk-cikar" class="h"><span class="num">5.3</span><span class="ht">Kuyruk – FIFO (ilk giren ilk çıkar)</span></h3>
+<p>Ekleme <strong>arkadan (rear/back)</strong>, silme <strong>önden (front)</strong>. Temel işlemler: <code class="tt">enqueue(x)</code>, <code class="tt">dequeue()</code>, <code class="tt">isEmpty()</code>, <code class="tt">isFull()</code>, (<code class="tt">size()</code>).</p>
+<h4 id="dizi-ile-dairesel-kuyruk" class="h"><span class="num"></span><span class="ht">Dizi ile dairesel kuyruk</span></h4>
+<div class="code"><pre><code><span class="k-k">class</span> Queue {
+<span class="k-k">public</span>:
+    Queue(<span class="k-k">int</span> size = <span class="k-n">10</span>) { values = <span class="k-k">new</span> <span class="k-k">double</span>[size]; maxSize = size;
+                           front = <span class="k-n">0</span>; rear = -<span class="k-n">1</span>; counter = <span class="k-n">0</span>; }
+    <span class="k-k">bool</span> IsEmpty() { <span class="k-k">return</span> counter == <span class="k-n">0</span>; }
+    <span class="k-k">bool</span> IsFull()  { <span class="k-k">return</span> counter &gt;= maxSize; }
+    <span class="k-k">bool</span> Enqueue(<span class="k-k">double</span> x) {
+        <span class="k-k">if</span> (IsFull()) { cout &lt;&lt; <span class="k-s">"Kuyruk dolu"</span>; <span class="k-k">return</span> <span class="k-k">false</span>; }
+        rear = (rear + <span class="k-n">1</span>) % maxSize;            <span class="k-c">// dairesel ilerleme</span>
+        values[rear] = x;  counter++;
+        <span class="k-k">return</span> <span class="k-k">true</span>;
+    }
+    <span class="k-k">bool</span> Dequeue(<span class="k-k">double</span>&amp; x) {
+        <span class="k-k">if</span> (IsEmpty()) { cout &lt;&lt; <span class="k-s">"Kuyruk bos"</span>; <span class="k-k">return</span> <span class="k-k">false</span>; }
+        x = values[front];
+        front = (front + <span class="k-n">1</span>) % maxSize;
+        counter--;
+        <span class="k-k">return</span> <span class="k-k">true</span>;
+    }
+<span class="k-k">private</span>:
+    <span class="k-k">int</span> front, rear, counter, maxSize;  <span class="k-k">double</span>* values;
+};</code></pre></div>
+<div class="akis-bas"><i class="shape s-basla"></i>Akış diyagramı: Enqueue ve Dequeue (dizi ile dairesel)</div>
+<div class="center"><div class="mprow"><div class="mp center" style="--w:0.480"><figure class="gfx gfx-flow"><button type="button" class="zoom" aria-label="Büyüt"><img src="assets/gfx/g_fe27ee23c162.svg" width="305" height="282" loading="lazy" alt="Akış diyagramı"></button></figure></div><div class="mp center" style="--w:0.480"><figure class="gfx gfx-flow"><button type="button" class="zoom" aria-label="Büyüt"><img src="assets/gfx/g_745e1f5fcc9c.svg" width="285" height="268" loading="lazy" alt="Akış diyagramı"></button></figure></div></div></div>
+<p><code class="tt">counter</code> eleman sayısını tutar; <code class="tt">% maxSize</code> ile indis başa döner.</p>
+<div class="viz" data-viz="kuyruk" data-init="5"><noscript>Bu animasyon için JavaScript gerekir.</noscript></div>
+<p>Dairesel kuyrukta enqueue ve dequeue <strong><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord">1</span><span class="mclose">)</span></span></span></span></strong>. Dairesel olmayan, silmede tüm elemanları öne kaydıran dizi kuyruğunda silme <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6667em;vertical-align:-0.0833em;"></span><span class="mord mathnormal">n</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">1</span></span></span></span> kaydırma <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.3669em;"></span><span class="mrel">⇒</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathnormal">n</span><span class="mclose">)</span></span></span></span> <span class="zd" title="Ders videosu ve dakikası">video 11 36:04</span>. Bağlantılı listeyle: enqueue sona (son düğüm işaretçisi tutularak), dequeue baştan, ikisi de <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord">1</span><span class="mclose">)</span></span></span></span>.</p>
+<h3 id="farz-edin-ki-sorularinda-yigin-ve-kuyrugu-bozmadan-gezmek" class="h"><span class="num">5.4</span><span class="ht">Farz edin ki sorularında yığın ve kuyruğu bozmadan gezmek</span></h3>
+<section class="box box-bilgi"><div class="box-h"><i class="shape s-islem"></i><span class="bt">İki temel kalıp – Not2 (“sınıf listeleri değişmeyecek”) için şart</span></div><div class="box-b"><p><strong>Yığın:</strong> geçici yığına aktar, işini yap, geri aktar (iki kez ters çevrildiği için sıra korunur):</p>
+<div class="code"><pre><code>Stack gec
+<span class="k-k">while</span> (!Y.isEmpty())  { o = Y.pop();  gec.push(o);  ...islem... }
+<span class="k-k">while</span> (!gec.isEmpty())  Y.push(gec.pop())</code></pre></div>
+<p><strong>Kuyruk:</strong> boyutu kadar döndür (çıkar–işle–arkaya geri koy); tur bitince aynı sıra:</p>
+<div class="code"><pre><code>n = K.size()
+<span class="k-k">for</span> (i = <span class="k-n">0</span>; i &lt; n; i++)  { o = K.dequeue();  ...islem...;  K.enqueue(o); }</code></pre></div>
+<p>Hoca derste ayrıca <code class="tt">yigin.clone()</code>, <code class="tt">kuyruk.clone()</code> ile kopya üzerinde çalıştı. Kopya fonksiyonu kullanacaksanız ne yaptığını açıklayın; geçici yapı ile geri yükleme her durumda kabul edilir.</p></div></section>
+<div class="akis-bas"><i class="shape s-basla"></i>Akış diyagramı: yığını bozmadan gezme</div>
+<div class="center"><figure class="gfx gfx-flow"><button type="button" class="zoom" aria-label="Büyüt"><img src="assets/gfx/g_8efea270ceb1.svg" width="271" height="494" loading="lazy" alt="Akış diyagramı"></button></figure></div>
+<div class="akis-bas"><i class="shape s-basla"></i>Akış diyagramı: kuyruğu döndürerek gezme</div>
+<div class="center"><figure class="gfx gfx-flow"><button type="button" class="zoom" aria-label="Büyüt"><img src="assets/gfx/g_93f876df565c.svg" width="289" height="354" loading="lazy" alt="Akış diyagramı"></button></figure></div>
+<h3 id="zaman-ve-alan-karmasikligi" class="h"><span class="num">5.5</span><span class="ht">Zaman ve alan karmaşıklığı</span></h3>
+<div class="center"><div class="tbl-wrap"><table class="tbl"><thead><tr><th>İşlem</th><th class="ac">En iyi</th><th class="ac">En kötü</th><th class="ac">Ek alan</th><th>Not</th></tr></thead><tbody><tr><td><code class="tt">push</code> / <code class="tt">pop</code> / <code class="tt">top</code></td><td class="ac"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">Ω</span><span class="mopen">(</span><span class="mord">1</span><span class="mclose">)</span></span></span></span></td><td class="ac"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord">1</span><span class="mclose">)</span></span></span></span></td><td class="ac"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord">1</span><span class="mclose">)</span></span></span></span></td><td>dizi ve bağlantılı liste gerçekleştirmesinde de sabit</td></tr><tr><td><code class="tt">enqueue</code> / <code class="tt">dequeue</code> (dairesel)</td><td class="ac"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">Ω</span><span class="mopen">(</span><span class="mord">1</span><span class="mclose">)</span></span></span></span></td><td class="ac"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord">1</span><span class="mclose">)</span></span></span></span></td><td class="ac"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord">1</span><span class="mclose">)</span></span></span></span></td><td><code class="tt">% maxSize</code> ile indis başa döner</td></tr><tr><td><code class="tt">dequeue</code> (kaydırmalı dizi)</td><td class="ac"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">Ω</span><span class="mopen">(</span><span class="mord">1</span><span class="mclose">)</span></span></span></span></td><td class="ac"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathnormal">n</span><span class="mclose">)</span></span></span></span></td><td class="ac"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord">1</span><span class="mclose">)</span></span></span></span></td><td>silmede <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6667em;vertical-align:-0.0833em;"></span><span class="mord mathnormal">n</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">1</span></span></span></span> eleman öne kayar</td></tr><tr><td>Postfix hesaplama</td><td class="ac"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">Θ</span><span class="mopen">(</span><span class="mord mathnormal">n</span><span class="mclose">)</span></span></span></span></td><td class="ac"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">Θ</span><span class="mopen">(</span><span class="mord mathnormal">n</span><span class="mclose">)</span></span></span></span></td><td class="ac"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathnormal">n</span><span class="mclose">)</span></span></span></span></td><td>her simge bir kez; yığında en fazla <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">n</span></span></span></span> sayı</td></tr><tr><td>Bozmadan gezme (yığın/kuyruk)</td><td class="ac"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">Θ</span><span class="mopen">(</span><span class="mord mathnormal">n</span><span class="mclose">)</span></span></span></span></td><td class="ac"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">Θ</span><span class="mopen">(</span><span class="mord mathnormal">n</span><span class="mclose">)</span></span></span></span></td><td class="ac"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathnormal">n</span><span class="mclose">)</span></span></span></span> / <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord">1</span><span class="mclose">)</span></span></span></span></td><td>yığında geçici yığın <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathnormal">n</span><span class="mclose">)</span></span></span></span>; kuyrukta döndürme ek alan istemez</td></tr></tbody></table></div></div>
+    </article>
+    <nav class="pager"><a class="pg prev" href="konu-04-liste.html"><small>Önceki</small><span>Bağlantılı listeler</span></a><a class="pg next" href="konu-06-agac.html"><small>Sonraki</small><span>İkili ağaçlar ve İAA</span></a></nav>
+  </main>
+</div>
+<div class="lightbox" id="lightbox" hidden>
+  <div class="lb-bar"><button type="button" data-z="-1" aria-label="Uzaklaştır">−</button><button type="button" data-z="0">Sığdır</button><button type="button" data-z="1" aria-label="Yakınlaştır">+</button><button type="button" data-z="x" aria-label="Kapat">✕</button></div>
+  <div class="lb-stage"><div class="lb-frame"><img alt=""></div></div>
+</div>
+<div class="search" id="search" hidden>
+  <div class="search-panel" role="dialog" aria-label="Arama">
+    <input type="search" id="searchIn" placeholder="Konu, algoritma ya da kelime ara (ör. pivot, AVL silme)" autocomplete="off">
+    <ol id="searchOut"></ol>
+    <p class="search-hint">Yukarı/aşağı ok ile seç, Enter ile git, Esc ile kapat.</p>
+  </div>
+</div>
+<script src="assets/search-index.js"></script>
+<script src="assets/app.js"></script>
+<script src="assets/viz.js"></script>
+</body>
+</html>
